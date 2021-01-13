@@ -16,7 +16,7 @@ provider "aws" {
 
 
 resource "aws_iam_user" "usr" {
-  name = "tk8supportuser"
+  name = "winnershrangers001"
   path = "/system/"
 
   tags = {
@@ -56,7 +56,6 @@ resource "aws_iam_user_policy" "usr_ro" {
             "Effect": "Allow",
             "Action": "s3:*",
             "Resource": [
-                "arn:aws:s3:::*/*",
                 "arn:aws:s3:::winnershawsk8gurus2021*"
                 ],
             "Condition": {

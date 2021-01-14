@@ -11,13 +11,13 @@ resource "aws_iam_user" "usr" {
 # Create IAM Access Key
 resource "aws_iam_access_key" "usr" {
   user    = aws_iam_user.usr.name
-  pgp_key = "keybase:someuserthatexists"
+  pgp_key = "keybase:${var.pgpusername}"
 }
 
 # Create Login Profile
 resource "aws_iam_user_login_profile" "usr" {
   user    = aws_iam_user.usr.name
-  pgp_key = "keybase:someuserthatexists"
+  pgp_key = "keybase:${var.pgpusername}"
 }
 
 # Attach Permission Policy to User Account
@@ -77,7 +77,7 @@ data "aws_iam_policy_document" "usr_s3_restricted" {
       "s3:ListBucket",
     ]
     resources = [
-      "arn:aws:s3:::winnershawsk8gurus2021*",
+      "arn:aws:s3:::${var.bucketprefix}*",
     ]
   }
 
@@ -99,13 +99,13 @@ data "aws_iam_policy_document" "usr_s3_restricted" {
       "s3:*"
     ]
     resources = [
-      "arn:aws:s3:::winnershawsk8gurus2021*",
+      "arn:aws:s3:::${var.bucketprefix}*",
     ]
     condition {
       test     = "StringEquals"
       variable = "aws:RequestedRegion"
       values = [
-        "eu-west-2",
+        var.region,
       ]
     }
   }

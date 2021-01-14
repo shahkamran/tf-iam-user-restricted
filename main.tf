@@ -2,18 +2,6 @@ provider "aws" {
   region = "eu-west-2"
 }
 
-###################################################################
-# IAM user without pgp_key (IAM access secret will be unencrypted)
-###################################################################
-#module "iam_user2" {
-#  source = "./modules/iam-user"
-#
-#  name = "tk8supportuser"
-#
-#  create_iam_user_login_profile = false
-#  create_iam_access_key         = true
-#}
-
 
 resource "aws_iam_user" "usr" {
   name = "winnershrangers001"
